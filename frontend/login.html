@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Register - TazajMart</title>
+    <meta name="description" content="Sign in to TazajMart to track your orders and access your account.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --primary: #22c55e;
+            --primary-dark: #16a34a;
+            --dark: #0a0f0a;
+            --card: #111811;
+            --border: #1e2d1e;
+            --text: #e8f5e9;
+            --text-muted: #6b7c6b;
+            --error: #ef4444;
+        }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background-image: radial-gradient(ellipse at 20% 50%, rgba(34,197,94,0.08) 0%, transparent 60%),
+                              radial-gradient(ellipse at 80% 20%, rgba(34,197,94,0.05) 0%, transparent 50%);
+        }
+        .auth-container {
+            width: 100%;
+            max-width: 440px;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .logo a {
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text);
+        }
+        .logo span { color: var(--primary); }
+        .logo p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 6px;
+        }
+        .auth-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 36px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        .tabs {
+            display: flex;
+            background: var(--dark);
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 28px;
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        .tab-btn.active {
+            background: var(--primary);
+            color: #fff;
+            font-weight: 600;
+        }
+        .form-section { display: none; }
+        .form-section.active { display: block; }
+        .form-group {
+            margin-bottom: 16px;
+        }
+        label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        input {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--dark);
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            color: var(--text);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+            outline: none;
+        }
+        input:focus { border-color: var(--primary); }
+        input::placeholder { color: var(--text-muted); }
+        .btn-primary {
+            width: 100%;
+            padding: 13px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(34,197,94,0.3); }
+        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .error-msg {
+            color: var(--error);
+            font-size: 0.85rem;
+            margin-top: 12px;
+            padding: 10px 14px;
+            background: rgba(239,68,68,0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(239,68,68,0.2);
+            display: none;
+        }
+        .success-msg {
+            color: var(--primary);
+            font-size: 0.85rem;
+            margin-top: 12px;
+            padding: 10px 14px;
+            background: rgba(34,197,94,0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(34,197,94,0.2);
+            display: none;
+        }
+        .divider {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin: 16px 0;
+            position: relative;
+        }
+        .divider::before, .divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background: var(--border);
+        }
+        .divider::before { left: 0; }
+        .divider::after { right: 0; }
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .back-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .back-link a:hover { text-decoration: underline; }
+        .admin-hint {
+            background: rgba(34,197,94,0.08);
+            border: 1px solid rgba(34,197,94,0.2);
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+        .admin-hint strong { color: var(--primary); }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="logo">
+            <a href="index.html">Tazaj<span>Mart</span></a>
+            <p>Fresh Groceries, Delivered Fast</p>
+        </div>
+
+        <div class="auth-card">
+            <div class="tabs">
+                <button class="tab-btn active" id="tab-login" onclick="switchTab('login')">Sign In</button>
+                <button class="tab-btn" id="tab-register" onclick="switchTab('register')">Register</button>
+            </div>
+
+            <!-- Login Form -->
+            <div class="form-section active" id="section-login">
+                <div class="admin-hint">
+                    <strong>Admin demo:</strong> admin@tazajmart.com / admin123
+                </div>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email Address</label>
+                        <input type="email" id="login-email" placeholder="you@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" placeholder="••••••••" required>
+                    </div>
+                    <div class="error-msg" id="login-error"></div>
+                    <div class="success-msg" id="login-success"></div>
+                    <button type="submit" class="btn-primary" id="login-btn">
+                        <i data-lucide="log-in"></i> Sign In
+                    </button>
+                </form>
+            </div>
+
+            <!-- Register Form -->
+            <div class="form-section" id="section-register">
+                <form id="register-form">
+                    <div class="form-group">
+                        <label for="reg-name">Full Name</label>
+                        <input type="text" id="reg-name" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-email">Email Address</label>
+                        <input type="email" id="reg-email" placeholder="you@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-password">Password (min 6 chars)</label>
+                        <input type="password" id="reg-password" placeholder="••••••••" required minlength="6">
+                    </div>
+                    <div class="error-msg" id="reg-error"></div>
+                    <div class="success-msg" id="reg-success"></div>
+                    <button type="submit" class="btn-primary" id="reg-btn">
+                        <i data-lucide="user-plus"></i> Create Account
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="back-link">
+            <a href="index.html"><i data-lucide="arrow-left" style="width:14px;height:14px;vertical-align:middle;"></i> Back to Store</a>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        function switchTab(tab) {
+            document.getElementById('section-login').classList.toggle('active', tab === 'login');
+            document.getElementById('section-register').classList.toggle('active', tab === 'register');
+            document.getElementById('tab-login').classList.toggle('active', tab === 'login');
+            document.getElementById('tab-register').classList.toggle('active', tab === 'register');
+        }
+
+        // Check if already logged in
+        const existingUser = localStorage.getItem('tazajmart_user');
+        if (existingUser) {
+            const u = JSON.parse(existingUser);
+            window.location.href = u.role === 'admin' ? 'admin.html' : 'index.html';
+        }
+
+        // Login
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('login-btn');
+            const errEl = document.getElementById('login-error');
+            const sucEl = document.getElementById('login-success');
+            errEl.style.display = 'none';
+            sucEl.style.display = 'none';
+            btn.disabled = true;
+            btn.textContent = 'Signing in...';
+
+            try {
+                const res = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: document.getElementById('login-email').value,
+                        password: document.getElementById('login-password').value
+                    })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error);
+
+                localStorage.setItem('tazajmart_token', data.token);
+                localStorage.setItem('tazajmart_user', JSON.stringify(data.user));
+
+                sucEl.textContent = `Welcome back, ${data.user.name}! Redirecting...`;
+                sucEl.style.display = 'block';
+
+                setTimeout(() => {
+                    window.location.href = data.user.role === 'admin' ? 'admin.html' : 'index.html';
+                }, 800);
+            } catch (err) {
+                errEl.textContent = err.message;
+                errEl.style.display = 'block';
+                btn.disabled = false;
+                btn.innerHTML = '<i data-lucide="log-in"></i> Sign In';
+                lucide.createIcons();
+            }
+        });
+
+        // Register
+        document.getElementById('register-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('reg-btn');
+            const errEl = document.getElementById('reg-error');
+            const sucEl = document.getElementById('reg-success');
+            errEl.style.display = 'none';
+            sucEl.style.display = 'none';
+            btn.disabled = true;
+            btn.textContent = 'Creating account...';
+
+            try {
+                const res = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: document.getElementById('reg-name').value,
+                        email: document.getElementById('reg-email').value,
+                        password: document.getElementById('reg-password').value
+                    })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error);
+
+                localStorage.setItem('tazajmart_token', data.token);
+                localStorage.setItem('tazajmart_user', JSON.stringify(data.user));
+
+                sucEl.textContent = 'Account created! Redirecting to store...';
+                sucEl.style.display = 'block';
+                setTimeout(() => { window.location.href = 'index.html'; }, 1000);
+            } catch (err) {
+                errEl.textContent = err.message;
+                errEl.style.display = 'block';
+                btn.disabled = false;
+                btn.innerHTML = '<i data-lucide="user-plus"></i> Create Account';
+                lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+</html>

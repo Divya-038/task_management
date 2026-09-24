@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TazajMart - Sleek & Responsive E-commerce Grocery</title>
+    <meta name="description" content="Shop fresh organic groceries at TazajMart. Get free delivery on orders over $200. Order fresh vegetables, fruits, dairy, and snacks.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Top Alert Banner -->
+    <div class="top-announcement">
+        <span>⚡ Super Deals: Get extra 10% off using coupon code <strong class="coupon-code">TAZAJ10</strong></span>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo-area">
+                <a href="#" class="logo-link">
+                    <span class="logo-icon"><i data-lucide="leaf"></i></span>
+                    <span class="logo-text">Tazaj<span class="logo-highlight">Mart</span></span>
+                </a>
+            </div>
+            
+            <nav class="nav-links">
+                <div class="dropdown">
+                    <button class="dropdown-btn">Products <i data-lucide="chevron-down" class="dropdown-arrow"></i></button>
+                    <div class="dropdown-content">
+                        <a href="#" data-category="Fruits & Vegetables">Fruits & Vegetables</a>
+                        <a href="#" data-category="Bakery & Dairy">Bakery & Dairy</a>
+                        <a href="#" data-category="Groceries">Groceries & Snacks</a>
+                        <a href="#" data-category="Beverages">Beverages</a>
+                        <a href="#" data-category="Meat & Seafood">Meat & Seafood</a>
+                    </div>
+                </div>
+                <a href="#" class="nav-link active">Home</a>
+                <a href="#" class="nav-link">Offers Info</a>
+                <a href="#" class="nav-link">Help & Support</a>
+                <a href="#" class="nav-link">Recent</a>
+                <a href="#" class="nav-link">Order History</a>
+            </nav>
+
+            <div class="search-area">
+                <div class="search-wrapper">
+                    <input type="text" id="search-input" placeholder="Search for fresh groceries, organic items...">
+                    <button class="search-btn" id="search-button"><i data-lucide="search"></i></button>
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <button class="action-btn wishlist-btn" title="Wishlist">
+                    <i data-lucide="heart"></i>
+                    <span class="badge" id="wishlist-badge">0</span>
+                </button>
+                <button class="action-btn cart-btn-trigger" id="cart-trigger" title="Shopping Cart">
+                    <i data-lucide="shopping-cart"></i>
+                    <span class="badge" id="cart-badge">0</span>
+                    <span class="cart-total-display">$0.00</span>
+                </button>
+                <div class="user-profile">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="User Avatar" class="avatar">
+                    <span class="username">You</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Promo Banner -->
+        <section class="hero-section">
+            <div class="hero-banner">
+                <div class="hero-text-content">
+                    <span class="hero-badge">Special Promotion</span>
+                    <h1 class="hero-title">Get <span class="green-highlight">free delivery</span> on shopping <span class="green-highlight">$200</span></h1>
+                    <p class="hero-subtitle">Get the freshest groceries delivered right to your home. Save time, skip the lines, and enjoy the convenience of quick, organic delivery.</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" id="hero-shop-now">Learn More <i data-lucide="arrow-right"></i></button>
+                    </div>
+                </div>
+                <div class="hero-image-content">
+                    <div class="hero-image-wrapper">
+                        <!-- Loaded from assets -->
+                        <img src="assets/hero_basket.jpg" alt="Basket of Fresh Vegetables" class="hero-img">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Catalog Section -->
+        <section class="catalog-section">
+            <div class="catalog-header">
+                <h2 class="section-title">All Products</h2>
+            </div>
+
+            <!-- Filter Controls -->
+            <div class="controls-bar">
+                <div class="filter-pills-container">
+                    <button class="filter-pill active" data-filter="all">All Categories</button>
+                    <button class="filter-pill" data-filter="Fruits & Vegetables">Fruits & Vegetables</button>
+                    <button class="filter-pill" data-filter="Bakery & Dairy">Bakery & Dairy</button>
+                    <button class="filter-pill" data-filter="Groceries">Groceries & Snacks</button>
+                    <button class="filter-pill" data-filter="Beverages">Beverages</button>
+                    <button class="filter-pill" data-filter="Meat & Seafood">Meat & Seafood</button>
+                </div>
+
+                <div class="sort-wrapper">
+                    <label for="sort-select" class="sort-label">Sort by</label>
+                    <div class="select-container">
+                        <select id="sort-select">
+                            <option value="default">Default Sorting</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="rating">Popularity / Ratings</option>
+                        </select>
+                        <i data-lucide="chevron-down" class="select-arrow"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Filters Info -->
+            <div class="active-filters-info" id="active-filters-info" style="display: none;">
+                <span class="results-count" id="results-count">0 items found</span>
+                <button class="clear-filters-btn" id="clear-filters-btn">Clear all filters <i data-lucide="x"></i></button>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="product-grid" id="product-grid">
+                <!-- Dynamic Content injected via app.js -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="logo-area">
+                    <span class="logo-icon"><i data-lucide="leaf"></i></span>
+                    <span class="logo-text">Tazaj<span class="logo-highlight">Mart</span></span>
+                </div>
+                <p class="brand-tagline">Providing fresh, healthy, and organic foods right to your doorstep since 2026.</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i data-lucide="facebook"></i></a>
+                    <a href="#" class="social-icon"><i data-lucide="instagram"></i></a>
+                    <a href="#" class="social-icon"><i data-lucide="twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-links-grid">
+                <div class="footer-col">
+                    <h3>Explore</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Latest Blogs</a></li>
+                        <li><a href="#">Special Offers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Contact Support</a></li>
+                        <li><a href="#">Track Order</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                        <li><a href="#">Shipping FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <ul class="contact-list">
+                        <li><i data-lucide="map-pin"></i> 100 Fresh Ave, Green City</li>
+                        <li><i data-lucide="phone"></i> +1 (555) TAZAJ-MART</li>
+                        <li><i data-lucide="mail"></i> support@tazajmart.com</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 TazajMart. All rights reserved. Built with premium design standards.</p>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Drawer (Slides from right) -->
+    <div class="cart-drawer-overlay" id="cart-overlay"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-drawer-header">
+            <div class="cart-header-title">
+                <i data-lucide="shopping-basket"></i>
+                <h2>Your Basket</h2>
+                <span class="cart-count-pill" id="cart-items-count">0</span>
+            </div>
+            <button class="close-drawer-btn" id="close-cart-btn"><i data-lucide="x"></i></button>
+        </div>
+
+        <div class="cart-drawer-content">
+            <!-- Empty state -->
+            <div class="cart-empty-state" id="cart-empty-state">
+                <div class="empty-icon"><i data-lucide="shopping-cart"></i></div>
+                <h3>Your basket is empty</h3>
+                <p>Add some fresh, healthy groceries to start shopping.</p>
+                <button class="btn btn-primary close-drawer-btn-inline">Start Shopping</button>
+            </div>
+
+            <!-- Cart Items List -->
+            <div class="cart-items-list" id="cart-items-list" style="display: none;">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+
+        <!-- Cart Summary Footer -->
+        <div class="cart-drawer-footer" id="cart-drawer-footer" style="display: none;">
+            <div class="promo-code-input-area">
+                <input type="text" id="cart-promo-input" placeholder="Enter coupon code (TAZAJ10)">
+                <button class="btn btn-secondary" id="apply-promo-btn">Apply</button>
+            </div>
+            <div class="summary-line">
+                <span>Subtotal</span>
+                <span id="cart-subtotal">$0.00</span>
+            </div>
+            <div class="summary-line" id="discount-row" style="display: none;">
+                <span>Discount (10%)</span>
+                <span class="discount-value" id="cart-discount">-$0.00</span>
+            </div>
+            <div class="summary-line">
+                <span>Delivery Fee</span>
+                <span id="cart-delivery">$0.00</span>
+                <div class="delivery-progress-container" id="delivery-progress-container">
+                    <div class="delivery-progress-text">Add <span id="delivery-needed-amount">$0.00</span> more for FREE delivery</div>
+                    <div class="delivery-progress-bar-wrapper">
+                        <div class="delivery-progress-bar" id="delivery-progress-bar" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="summary-line total-line">
+                <span>Total</span>
+                <span id="cart-total">$0.00</span>
+            </div>
+            <button class="btn btn-primary checkout-btn-trigger" id="checkout-trigger">Proceed to Checkout <i data-lucide="credit-card"></i></button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal-overlay" id="checkout-modal-overlay">
+        <div class="modal-card">
+            <button class="close-modal-btn" id="close-checkout-modal"><i data-lucide="x"></i></button>
+            
+            <div class="modal-header">
+                <h2>Secure Checkout</h2>
+                <p>Complete your fresh grocery order</p>
+            </div>
+
+            <!-- Steps Progress -->
+            <div class="checkout-steps">
+                <div class="step active" id="step-btn-1">1. Delivery</div>
+                <div class="step" id="step-btn-2">2. Payment</div>
+                <div class="step" id="step-btn-3">3. Done</div>
+            </div>
+
+            <!-- Checkout Form Content -->
+            <div class="checkout-form-content">
+                <!-- Step 1: Address Details -->
+                <div class="checkout-step-content" id="checkout-step-1">
+                    <form id="delivery-form">
+                        <div class="form-grid">
+                            <div class="form-group col-span-2">
+                                <label for="cust-name">Full Name</label>
+                                <input type="text" id="cust-name" required placeholder="John Doe">
+                            </div>
+                            <div class="form-group col-span-2">
+                                <label for="cust-address">Delivery Address</label>
+                                <input type="text" id="cust-address" required placeholder="123 Fresh Lane, Apt 4B">
+                            </div>
+                            <div class="form-group">
+                                <label for="cust-city">City</label>
+                                <input type="text" id="cust-city" required placeholder="Greenville">
+                            </div>
+                            <div class="form-group">
+                                <label for="cust-zip">Zip/Postal Code</label>
+                                <input type="text" id="cust-zip" required placeholder="12345">
+                            </div>
+                            <div class="form-group col-span-2">
+                                <label for="cust-phone">Phone Number</label>
+                                <input type="tel" id="cust-phone" required placeholder="+1 (555) 019-2834">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary w-full">Continue to Payment <i data-lucide="arrow-right"></i></button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Step 2: Payment Details -->
+                <div class="checkout-step-content" id="checkout-step-2" style="display: none;">
+                    <div class="payment-methods">
+                        <label class="payment-method-card active">
+                            <input type="radio" name="payment-method" value="card" checked>
+                            <i data-lucide="credit-card"></i>
+                            <div class="payment-method-info">
+                                <span class="method-title">Credit / Debit Card</span>
+                                <span class="method-desc">Pay securely with Visa, Mastercard, or Amex</span>
+                            </div>
+                        </label>
+                        <label class="payment-method-card">
+                            <input type="radio" name="payment-method" value="paypal">
+                            <i data-lucide="wallet"></i>
+                            <div class="payment-method-info">
+                                <span class="method-title">PayPal / Digital Wallet</span>
+                                <span class="method-desc">Pay via your PayPal account instantly</span>
+                            </div>
+                        </label>
+                        <label class="payment-method-card">
+                            <input type="radio" name="payment-method" value="cod">
+                            <i data-lucide="banknote"></i>
+                            <div class="payment-method-info">
+                                <span class="method-title">Cash on Delivery (COD)</span>
+                                <span class="method-desc">Pay with cash when order is delivered</span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- Credit Card Details Form -->
+                    <form id="payment-form" class="mt-4">
+                        <div id="card-fields-container">
+                            <div class="form-group">
+                                <label for="card-num">Card Number</label>
+                                <input type="text" id="card-num" required placeholder="0000 0000 0000 0000" maxlength="19">
+                            </div>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="card-expiry">Expiry Date</label>
+                                    <input type="text" id="card-expiry" required placeholder="MM/YY" maxlength="5">
+                                </div>
+                                <div class="form-group">
+                                    <label for="card-cvv">CVV</label>
+                                    <input type="password" id="card-cvv" required placeholder="123" maxlength="3">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer flex-row mt-4">
+                            <button type="button" class="btn btn-secondary" id="back-to-address-btn"><i data-lucide="arrow-left"></i> Back</button>
+                            <button type="submit" class="btn btn-primary" id="place-order-btn">Place Order ($0.00)</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Step 3: Success Screen -->
+                <div class="checkout-step-content text-center" id="checkout-step-3" style="display: none;">
+                    <div class="success-animation-container">
+                        <div class="success-checkmark-circle">
+                            <div class="success-checkmark-icon"><i data-lucide="check"></i></div>
+                        </div>
+                    </div>
+                    <h3 class="success-title">Order Placed Successfully!</h3>
+                    <p class="success-message">Thank you for shopping at TazajMart. Your order has been placed and is currently being processed. You will receive an SMS confirmation details shortly.</p>
+                    <div class="order-details-box">
+                        <div class="detail-row"><span>Order ID</span><strong id="success-order-id">#TZ-87421-99</strong></div>
+                        <div class="detail-row"><span>Estimated Delivery</span><strong>Within 2 Hours</strong></div>
+                        <div class="detail-row"><span>Total Paid</span><strong id="success-order-total">$0.00</strong></div>
+                    </div>
+                    <div class="modal-footer justify-center">
+                        <button class="btn btn-primary" id="close-success-btn">Continue Shopping</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+    <script src="app.js"></script>
+</body>
+</html>
